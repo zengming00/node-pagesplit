@@ -2,7 +2,7 @@
   "name": "pagesplit",
   "version": "1.0.0",
   "description": "a page spliter, like ThinkPHP Page.class",
-  "main": "index.js",
+  "main": "Page.class.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
