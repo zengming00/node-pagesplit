@@ -1,4 +1,7 @@
 var http = require('http');
+var url = require('url');
+var querystring = require('querystring');
+
 var Page = require('../Page.class');
 
 http.createServer(function (req,res) {
@@ -7,18 +10,18 @@ http.createServer(function (req,res) {
     }
     res.setHeader('Content-Type', 'text/html');
 
-    console.log(req.originalUrl);
-    console.log(req);
-return;
-    var totalRows = 51; //总行数
-    var listRows = 10; //每页显示条数
+    let u = url.parse(req.url);
+    //添加两个express才有的属性
+    req.originalUrl = u.pathname;
+    req.query = querystring.parse(u.query);
+
+
+    var totalRows = 51; //模拟从数据库中查询得到的总记录数
+    var listRows = 10; //每页显示的数量
     var pg = new Page(req, totalRows, listRows);
-
-
-    var data = "select * from db limit " + pg.firstRow + "," + pg.listRows + ";"
-        + "<br/>"
-        + pg.show();
-
+    //得到相应的查询参数，实现分页功能
+    var sql = "select * from db limit " + pg.firstRow + "," + pg.listRows + ";";
+    var data = sql + "<br/>" + pg.show();//前端分页代码
     res.end(data);
 
 }).listen(3000);
