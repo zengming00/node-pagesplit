@@ -47,12 +47,13 @@ exports = module.exports = function Page(req, totalRows, listRows){
     if(isEmptyObject(req.query)){
         url +=  p+"="+pageTag;
     }else{
+        //保留原有的url参数
         req.query[p]=pageTag;
+        var tmp = [];
         for(var i in req.query){
-            //TODO index?name=vale   name没有过滤，有XSS风险
-            //TODO 使用encodeURIComponent(i)对name进行过滤
-            url += encodeURIComponent(i) + "=" + encodeURIComponent(req.query[i]) + "&";
+            tmp.push(encodeURIComponent(i) + "=" + encodeURIComponent(req.query[i]));
         }
+        url += tmp.join('&');
     }
 
     /**
