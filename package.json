@@ -1,6 +1,6 @@
 {
   "name": "pagesplit",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "a page spliter, like ThinkPHP Page.class",
   "main": "Page.class.js",
   "scripts": {

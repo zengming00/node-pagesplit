@@ -34,8 +34,8 @@ exports = module.exports = function Page(req, totalRows, listRows){
     /* 基础设置 */
     this.rollPage   = 11;// 分页栏每页显示的页数
     this.lastSuffix = true; // 最后一页是否显示总页数
-    this.totalRows  = totalRows; //设置总记录数
-    this.listRows   = listRows || 20;  //设置每页显示行数
+    this.totalRows  = Math.abs(totalRows); //设置总记录数
+    this.listRows   = Math.abs(listRows || 20);  //设置每页显示行数
     this.nowPage    = req.query[p] ? (req.query[p]|0) : 1;
     this.nowPage    = this.nowPage>0 ? this.nowPage : 1;
     this.firstRow   = this.listRows * (this.nowPage - 1);// 起始行数  (可能由于get参数的影响导致起始行超过总行数，但不影响使用）
